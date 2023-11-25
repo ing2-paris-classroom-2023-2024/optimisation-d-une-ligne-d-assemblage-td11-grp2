@@ -3,8 +3,14 @@
 //
 
 typedef struct exclu {
-    int op1, op2, nbtotal;
+    int op1, op2;
 };
+
+typedef struct mesexclu {
+    int tailles;
+    struct exclu opposees[100] ;
+
+} Mesexclu;
 
 typedef struct preced {
     int op1, op2, nbtotal;
