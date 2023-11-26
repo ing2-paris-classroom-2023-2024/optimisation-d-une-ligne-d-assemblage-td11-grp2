@@ -31,6 +31,7 @@ int main() {
 
     soustraction = nombre1 / nombre2;
 
+
     // Affichage du résultat
     printf("Le produit de %d et %d est : %d\n", nombre1, nombre2, soustraction);
 
