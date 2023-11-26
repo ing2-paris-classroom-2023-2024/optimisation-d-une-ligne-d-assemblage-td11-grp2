@@ -647,22 +647,7 @@ Mesexclu chargementDonnes(const char* nom_fichier) {
         exclusion.opposees[exclusion.tailles].op1=valeur1;
         exclusion.opposees[exclusion.tailles].op2=valeur2;
         exclusion.tailles=exclusion.tailles+1;
-    }
 
-    fclose(fichier);
-    printf("taille:%d\n",exclusion.tailles);
-
-    // Affiche les valeurs de la structure Mesexclu
-    printf("Structure Mesexclu : \n");
-    for (int i = 0; i < exclusion.tailles; i++) {
-        printf("(%d, %d)\n", exclusion.opposees[i].op1, exclusion.opposees[i].op2);
-    }
-
-    fclose(fichier);
-    return exclusion;
-}*/
-
-/*int trouvertaille(const char* nom_fichier){
 
 }*/
 
