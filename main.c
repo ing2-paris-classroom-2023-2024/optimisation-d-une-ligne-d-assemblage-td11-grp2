@@ -34,6 +34,8 @@ int main() {
     printf("La différence  de %d et %d est : %d\n", nombre1, nombre2, soustraction);
 
 
+
+
     return 0;
 
 }
