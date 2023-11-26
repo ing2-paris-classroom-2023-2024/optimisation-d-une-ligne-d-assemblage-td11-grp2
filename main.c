@@ -3,7 +3,6 @@
 //
 #include <stdio.h>
 
-#include "sspg.c"
 #include "donnees.h"
 
 int main() {
