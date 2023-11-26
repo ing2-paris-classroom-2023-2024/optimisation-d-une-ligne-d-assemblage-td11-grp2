@@ -30,5 +30,6 @@ int main() {
     printf("Le produit de %d et %d est : %d\n", nombre1, nombre2, produit);
     return 0;
 
+
 }
 // histoire de faire des commit quoi + 1 encore
