@@ -28,11 +28,10 @@ int main() {
     // Affichage du résultat
     printf("Le produit de %d et %d est : %d\n", nombre1, nombre2, produit);
 
-    soustraction = nombre1 / nombre2;
+    soustraction = nombre1 - nombre2;
 
     // Affichage du résultat
-    printf("Le produit de %d et %d est : %d\n", nombre1, nombre2, soustraction);
-
+    printf("La différence  de %d et %d est : %d\n", nombre1, nombre2, soustraction);
 
     return 0;
 }
