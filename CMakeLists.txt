@@ -3,4 +3,5 @@ project(optimisation-d-une-ligne-d-assemblage-td11-grp2 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(optimisation-d-une-ligne-d-assemblage-td11-grp2 main.c sspg.c donnees.h)
+add_executable(optimisation-d-une-ligne-d-assemblage-td11-grp2 main.c sspg.c donnees.h
+        main.c)
