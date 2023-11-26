@@ -23,7 +23,6 @@ int main() {
     // Affichage du résultat
     printf("La somme de %d et %d est : %d\n", nombre1, nombre2, somme);
 
-
     produit = nombre1 * nombre2;
 
     // Affichage du résultat
@@ -39,4 +38,4 @@ int main() {
 
 
 }
-// histoire de faire des commit quoi + 1 encore
+
