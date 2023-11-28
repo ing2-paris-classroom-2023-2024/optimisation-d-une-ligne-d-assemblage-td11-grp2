@@ -639,14 +639,6 @@ Mesexclu chargementDonnes(const char* nom_fichier) {
     for(int i=0;i<100;i++){
         exclusion.opposees[i].op1=0;
         exclusion.opposees[i].op2=0;
-    }
-
-    exclusion.tailles = 0;
-    int valeur1, valeur2;
-    while(fscanf(fichier,"%d %d",&valeur1,&valeur2)==2){
-        exclusion.opposees[exclusion.tailles].op1=valeur1;
-        exclusion.opposees[exclusion.tailles].op2=valeur2;
-        exclusion.tailles=exclusion.tailles+1;
 
 
 }*/
