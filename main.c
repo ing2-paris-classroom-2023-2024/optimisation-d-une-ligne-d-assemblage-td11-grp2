@@ -11,7 +11,19 @@ int main() {
     int b=1000;
     int c=0;
     c=a+b;
-    printf("%d",c);
+
+
+
+    printf(" Choisissez la contrainte que vous voulez utiliser : \n\n");
+    printf("           1- Contrainte de precedence seule \n");
+    printf("           2- contrainte de destruction seule \n");
+    printf("           3- contrainte de temps de cycle seule \n");
+    printf("           4- Multicontrainte \n\n\n ");
+    scanf("%d",&a);
+
+
+
+
     return 0;
 
 
