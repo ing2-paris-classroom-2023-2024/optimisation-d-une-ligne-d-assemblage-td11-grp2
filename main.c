@@ -8,7 +8,7 @@
 int main() {
     int a=1;
 
-    int b=3;
+    int b=5;
     int c=0;
     c=a+b;
     printf("%d",c);
