@@ -115,14 +115,71 @@ void remplirGraphe(struct mesprecedent preced,struct Graphe *mongraphe1) {
     }
 }
 
-Noeud initNoeud(struct mesprecedent preced) {
-    Noeud noeud1[preced.tailles];
-    for (int i = 0; i <preced.tailles; i++) {
-        noeud1[i].station = i;
-        noeud1[i].predecessor = NULL;  // Initialisation de la liste de prédécesseurs
+void classerinit(int* tableau,struct Graphe *mongraphe1,struct mesprecedent preced) {
+    printf("classer ok\n");
+    int reserve = 0;
+    int compteur = 0;
+    int compteurtab=0;
+
+    for(int i=0;i<preced.tailles;i++) {
+        tableau[i]=0;
     }
-    ///return noeud1; a finir
+    for (int b = 0; b < mongraphe1->nbSom; b++) {
+        reserve = mongraphe1->adjMatrix[0][b];
+        for (int c = 0; c < mongraphe1->nbSom; c++) {
+            if (reserve == mongraphe1->adjMatrix[1][c]) {
+                compteur=compteur+1;
+            }
+        }
+        if(compteur==0){
+            printf("%d n'a pas de precedent\n",reserve);
+            tableau[compteurtab]=reserve;
+            compteurtab=compteurtab+1;
+        }
+        //printf("%d compteur:%d\n",reserve,compteur);
+        compteur=0;
+    }
+    /*printf("tableau:");
+    for(int i=0;i<preced.tailles;i++) {
+        printf("%d\t",tableau[i]);
+    }*/
 }
+
+void classersuite(int* tableau,struct Graphe *mongraphe1,struct mesprecedent preced) {
+
+    printf("tableau:");
+    for(int i=0;i<preced.tailles;i++) {
+        printf("%d\t", tableau[i]);
+    }
+
+    /* trouver a partir de l'origine les etapes suivantes en regardant les cases [1][a] du tableau...*/
+
+
+}
+
+
+
+
+
+/*Noeud* initNoeud(struct mesprecedent preced) {
+    Noeud* noeud1[preced.tailles];
+    for (int i = 0; i <preced.tailles; i++) {
+        noeud1[i]->station = i;
+        noeud1[i]->predecessor = NULL;  // Initialisation de la liste de prédécesseurs
+    }
+    printf("init noeud ok");
+    return noeud1;
+}
+
+void remplirNoeud (struct Graphe *mongraphe1, struct noeud *noeud1 ){
+    for (int i = 0; i <mongraphe1->nbSom; i++) {
+        noeud1[i].station = mongraphe1->adjMatrix[1][i];
+        if (mongraphe1->adjMatrix[0][i] >= 0 && mongraphe1->adjMatrix[0][i] < mongraphe1->nbSom) {
+            noeud1[i].predecessor = &noeud1[mongraphe1->adjMatrix[0][i]];
+        }else {printf("erreur remplissage au rang %d",i);
+        }
+    }
+}*/
 
 /*void ajoutarc(graphe* mongraphe,int source, int destination){
     mongraphe->adjMatrix[source][destination] = 1;
@@ -170,7 +227,11 @@ int main() {
     initGraph(test,&mongraphe1);
     remplirGraphe(test,&mongraphe1);
     struct noeud monnoeud;
-    initNoeud(test);
+    int ordre[test.tailles];
+    classerinit(&ordre,&mongraphe1,test);
+    classersuite(&ordre,&mongraphe1,test);
+    //initNoeud(test);
+    //remplirNoeud(&mongraphe1,&monnoeud);
     /*for(int i=0;i<test.tailles;i++){
         printf("boucle:i");
         ajoutarc(mongraphe,test.precedent[i].pre1, test.precedent[i].pre2);
