@@ -154,12 +154,7 @@ void classersuite(int* tableau,struct Graphe *mongraphe1,struct mesprecedent pre
 
     /* trouver a partir de l'origine les etapes suivantes en regardant les cases [1][a] du tableau...*/
 
-
 }
-
-
-
-
 
 /*Noeud* initNoeud(struct mesprecedent preced) {
     Noeud* noeud1[preced.tailles];
