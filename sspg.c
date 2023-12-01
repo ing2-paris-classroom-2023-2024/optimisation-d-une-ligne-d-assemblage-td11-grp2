@@ -1,7 +1,3 @@
-//
-// Created by Frank BRAUD on 11/11/2023.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -23,7 +19,6 @@ typedef struct noeud{
     int station;
     struct noeud *predecessor;
 }Noeud;
-
 
 int trouvertaille(const char* nom_fichier){
 
@@ -115,11 +110,10 @@ void remplirGraphe(struct mesprecedent preced,struct Graphe *mongraphe1) {
     }
 }
 
-void classerinit(int* tableau,struct Graphe *mongraphe1,struct mesprecedent preced) {
+void classerinit(int* tableau,struct Graphe *mongraphe1,struct mesprecedent preced, int compteurtab) {
     printf("classer ok\n");
     int reserve = 0;
     int compteur = 0;
-    int compteurtab=0;
 
     for(int i=0;i<preced.tailles;i++) {
         tableau[i]=0;
@@ -135,6 +129,7 @@ void classerinit(int* tableau,struct Graphe *mongraphe1,struct mesprecedent prec
             printf("%d n'a pas de precedent\n",reserve);
             tableau[compteurtab]=reserve;
             compteurtab=compteurtab+1;
+            printf("compteur tab: %d \n",compteurtab);
         }
         //printf("%d compteur:%d\n",reserve,compteur);
         compteur=0;
@@ -143,16 +138,88 @@ void classerinit(int* tableau,struct Graphe *mongraphe1,struct mesprecedent prec
     for(int i=0;i<preced.tailles;i++) {
         printf("%d\t",tableau[i]);
     }*/
-}
 
-void classersuite(int* tableau,struct Graphe *mongraphe1,struct mesprecedent preced) {
+    printf("compteur: %d\n",compteurtab);
+    for(int terme=0; terme<preced.tailles;terme++){
+        for(int i=0; i<preced.tailles; i++) {
+            if (tableau[terme] == mongraphe1->adjMatrix[0][i]) {
+                printf("le terme %d --  tableau: %d -- matrice ligne: %d\n",tableau[terme], terme, i+1);
+                for(int j=0; j<preced.tailles;j++){
+                    if(tableau[j]==tableau[compteurtab]){
+                        if(tableau[compteurtab]!=0) {
+                            printf("le nombre: %d est deja present\n", tableau[compteurtab]);
+                        }
+                    }
+                }
+                tableau[compteurtab] = mongraphe1->adjMatrix[1][i];
+                compteurtab = compteurtab + 1;
+            }
+        }
+    }
 
-    printf("tableau:");
-    for(int i=0;i<preced.tailles;i++) {
+
+    printf("\n \n \n tableau: ");
+    for (int i = 0; i < preced.tailles; i++) {
         printf("%d\t", tableau[i]);
     }
 
-    /* trouver a partir de l'origine les etapes suivantes en regardant les cases [1][a] du tableau...*/
+}
+
+void classersuite(int* tableau,struct Graphe *mongraphe1,struct mesprecedent preced,int compteurtab) {
+
+    /*printf("tableau:");
+    for(int i=0;i<preced.tailles;i++) {
+        printf("%d\t", tableau[i]);
+    }*/
+
+    /*for (int a = 0; a < mongraphe1->nbSom; a++) {
+        for (int b = 0; b < mongraphe1->nbSom; b++) {
+            if (mongraphe1->adjMatrix[1][a] == mongraphe1->adjMatrix[0][a]) {
+                tableau[compteurtab] = mongraphe1->adjMatrix[1][a];
+                compteurtab=compteurtab+1;
+                printf("compteur: %d\n",compteurtab);
+            }
+        }
+    }*/// inutile??
+
+
+    /* trouver à partir de l'origine les etapes suivantes en regardant les cases [1][a] du tableau...*/
+    /*printf("tableau :");
+    for (int i = 0; i < preced.tailles; i++) {
+        printf("%d\t", tableau[i]);
+    }*/
+
+    printf("compteur: %d",compteurtab);
+    for(int terme=0; terme<preced.tailles;terme++){
+        for(int i=0; i<preced.tailles; i++) {
+            mongraphe1->adjMatrix[0][i];
+            if (tableau[terme] == mongraphe1->adjMatrix[0][i]) {
+                tableau[compteurtab] = mongraphe1->adjMatrix[1][i];
+                compteurtab = compteurtab + 1;
+            }
+        }
+    }
+
+    /* trouver à partir de l'origine les etapes suivantes en regardant les cases [1][a] du tableau...*/
+    printf("tableau :");
+    for (int i = 0; i < preced.tailles; i++) {
+        printf("%d\t", tableau[i]);
+    }
+
+    /*int a;
+    for(int i=0; i<preced.tailles; i++){
+        do {
+            for (a = 0; a < preced.tailles; a++) {
+                mongraphe1->adjMatrix[0][a];
+            }
+        }while (mongraphe1->adjMatrix[0][a]==tableau[i])
+            for(int j; j<preced.tailles;j++){
+                tableau[i]
+            }
+
+        }while();
+
+    }*/
 
 }
 
@@ -223,16 +290,17 @@ int main() {
     remplirGraphe(test,&mongraphe1);
     struct noeud monnoeud;
     int ordre[test.tailles];
-    classerinit(&ordre,&mongraphe1,test);
-    classersuite(&ordre,&mongraphe1,test);
-    //initNoeud(test);
-    //remplirNoeud(&mongraphe1,&monnoeud);
-    /*for(int i=0;i<test.tailles;i++){
+    int compteurtab1=0;
+    classerinit(&ordre,&mongraphe1,test,compteurtab1);
+    //classersuite(&ordre,&mongraphe1,test,compteurtab1);
+    /*initNoeud(test);
+    remplirNoeud(&mongraphe1,&monnoeud);
+    for(int i=0;i<test.tailles;i++){
         printf("boucle:i");
         ajoutarc(mongraphe,test.precedent[i].pre1, test.precedent[i].pre2);
         printf("ajoute:%d",i);
-    }*/
-    //topologicalSort(mongraphe);
+    }
+    topologicalSort(mongraphe);*/
 
     return 0;
 }
