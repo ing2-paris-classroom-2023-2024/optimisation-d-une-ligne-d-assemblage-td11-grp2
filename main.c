@@ -122,6 +122,7 @@ int trouvertaille(const char* nom_fichier){
         printf("|%d||%.2f|\n",oper2->ajdOpe[0][b],oper2->ajdOpe[1][b]);
     }
 }*/
+
 Mespreced chargementDonnes(const char* nom_fichier) {
     Mespreced preced;
     FILE* fichier = fopen(nom_fichier, "r");
@@ -534,7 +535,7 @@ void afficherColoration(int taille, int *couleurs, int *taches) {
     }
 }
 
-int mainExclu() {
+int mainExclu(int *tabfin) {
     t_tache1 exclusion1 ;
     t_machines tab1;
     t_machines tab2;
@@ -574,7 +575,7 @@ int mainExclu() {
 
     printf("%d\n", essai.taille);
 
-    coloration(taches,&graphe_exclu,a,&tableau_exclusion);
+    coloration(&tabfin,&graphe_exclu,a,&tableau_exclusion);
 
     /*if (colorerGraphe( essai.taille, &graphe_exclu, couleurs, a)) {
         printf("Attribution de machines réussie.\n");
@@ -589,8 +590,6 @@ int mainExclu() {
 }
 
 int main() {
-
-    int a =mainExclu();
 
     Mespreced test = chargementDonnes("precedent.txt");
     //printf("taille %d",test.tailles);
@@ -616,5 +615,6 @@ int main() {
     }*/
     struct tempsop classement[100];
     calcultemps(tableau_operations,&ordre,test,classement);
+    int a =mainExclu(ordre);
     return 0;
 }
