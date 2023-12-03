@@ -16,10 +16,10 @@ typedef struct machines{
     int tableau[100];
 
 }t_machines;
-struct tempexclu{
+/*struct tempexclu{
     int operation;
     unsigned int couleur;
-};
+};*/
 struct precede {
     int pre1, pre2;
 };
@@ -34,6 +34,7 @@ typedef struct Graphe {
 struct tempsop{
     int operation;
     float temps;
+    unsigned int couleur;
 };
 /*struct mesope{
     struct tempsop tabop[100];
@@ -396,7 +397,7 @@ void initGraphExclu(struct tache2 exclu,struct Graphe_exclusion *graphe_exclu) {
     printf("matrice initialise\n");
 }
 
-void compter_taches(int taches[100],struct tempexclu *tabexclu){
+void compter_taches(int taches[100],struct tempsop *tabexclu){
 
     FILE *file = fopen("exclusion.txt", "r");
 
@@ -475,7 +476,7 @@ int couleurPossible(int sommet, int couleur, int a, t_graphe_exclu *mongraphe_ex
     return 1; // La couleur est possible
 }
 
-void coloration(int taches[100], struct Graphe_exclusion *graphe_exclu, int taille, struct tempexclu *tabexclu) {
+void coloration(int taches[100], struct Graphe_exclusion *graphe_exclu, int taille, struct tempsop *tabexclu) {
     for (int i = 0; i < taille; i++) {
         tabexclu[i].couleur = 1; // Initialise la couleur à 1 par défaut
         for (int a = 0; a < 2; a++) {
@@ -516,16 +517,51 @@ void coloration(int taches[100], struct Graphe_exclusion *graphe_exclu, int tail
         for (int j = 0; j < taille - i - 1; j++) {
             if (tabexclu[j].couleur > tabexclu[j + 1].couleur) {
                 // Échanger les éléments
-                struct tempexclu temp = tabexclu[j];
+                struct tempsop temp = tabexclu[j];
                 tabexclu[j] = tabexclu[j + 1];
                 tabexclu[j + 1] = temp;
             }
         }
     }
+    FILE *fichier = fopen("operations.txt", "r");
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+    }
 
+    int operation;
+    float temps;
+    int taille1 = 0;
+
+    while (fscanf(fichier, "%d %f", &operation, &temps) == 2) {
+        tabexclu[taille1].temps = temps;
+        taille1++;
+
+        if (taille1 >= 100) {
+            printf("Erreur: Tableau de taille dépassée\n");
+        }
+    }
+    fclose(fichier);
+
+
+    /*float duree_stations=0;
+    for (int i=0; i<taille;i++){
+        printf("temps: %.2f",tabexclu[i].temps);
+        }
+
+
+    for (int i=0; i<taille;i++){
+        if(tabexclu[0].couleur){
+            duree_stations=tabexclu[0].temps;
+        }else{
+            if (tabexclu[i].couleur==tabexclu[i-1].couleur){
+                duree_stations= duree_stations+tabexclu[i].temps;
+            }
+        }
+}
+*/
     // Affichage des résultats triés
     for (int i = 0; i < taille; i++) {
-        printf("l'operation: %d --> couleur: %u\n", tabexclu[i].operation, tabexclu[i].couleur);
+        printf("l'operation: %d --> station no.%u ---> duree total: %.2f\n", tabexclu[i].operation, tabexclu[i].couleur, tabexclu[i].temps);
     }
 }
 
@@ -550,7 +586,7 @@ int mainExclu(int *tabfin) {
         tab4.tableau[i]=0;
         tab5.tableau[i]=0;
     }
-    struct tempexclu tableau_exclusion[100];
+    struct tempsop tableau_exclusion[100];
 
     int taches[100];
     t_tache2 essai = lire_infos( "exclusion.txt" , taches);
